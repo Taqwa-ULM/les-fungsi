@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="id" class="h-full bg-slate-50">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mastering Komposisi & Invers Fungsi - Les Privat Interaktif</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- KaTeX for Math Rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0f5ff',
+                            100: '#e0ebff',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .katex-display { margin: 0.5em 0; }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #f1f5f9; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+    </style>
+</head>
+<body class="h-full flex flex-col font-sans text-slate-800 antialiased selection:bg-indigo-500 selection:text-white">
+
+    <!-- Header / Navbar -->
+    <header class="bg-indigo-900 text-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo & Title -->
+                <div class="flex items-center space-x-3">
+                    <div class="p-2 bg-indigo-600 rounded-lg shadow-inner">
+                        <i class="fa-solid fa-calculator text-xl text-amber-300"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-lg font-bold leading-tight">LesPrivat <span class="text-amber-400">Math</span></h1>
+                        <p class="text-xs text-indigo-200">Komposisi & Invers Fungsi</p>
+                    </div>
+                </div>
+
+                <!-- Mode Switcher Tabs -->
+                <nav class="flex space-x-1 sm:space-x-2 bg-indigo-950 p-1 rounded-xl">
+                    <button id="tab-belajar" onclick="switchMode('belajar')" className="" class="px-3 sm:px-5 py-2 text-xs sm:text-sm font-semibold rounded-lg transition-all flex items-center space-x-2 bg-indigo-600 text-white shadow">
+                        <i class="fa-solid fa-book-open"></i>
+                        <span class="hidden sm:inline">Mode</span> Belajar
+                    </button>
+                    <button id="tab-ujian" onclick="switchMode('ujian')" class="px-3 sm:px-5 py-2 text-xs sm:text-sm font-semibold rounded-lg transition-all flex items-center space-x-2 text-indigo-200 hover:text-white hover:bg-indigo-800/50">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                        <span class="hidden sm:inline">Mode</span> Ujian (20 Soal)
+                    </button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 overflow-y-auto custom-scrollbar bg-slate-100 p-4 sm:p-6 lg:p-8">
+        <div class="max-w-7xl mx-auto">
+
+            <!-- ================= MODE BELAJAR ================= -->
+            <section id="view-belajar" class="space-y-6">
+                
+                <!-- Hero Tutor Card -->
+                <div class="bg-gradient-to-r from-indigo-600 to-indigo-800 rounded-2xl p-6 text-white shadow-md relative overflow-hidden">
+                    <div class="relative z-10 max-w-2xl">
+                        <span class="bg-amber-400 text-indigo-950 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Modul Les Privat</span>
+                        <h2 class="text-2xl sm:text-3xl font-extrabold mt-2">Ringkasan Konsep & Trik Cepat</h2>
+                        <p class="text-indigo-100 text-sm mt-1">Pahami teori mendasar, trik pengerjaan kilat, dan gunakan Sandbox Kalkulator interaktif untuk eksperimen rumus bersama murid!</p>
+                    </div>
+                    <i class="fa-solid fa-cubes absolute -right-6 -bottom-6 text-9xl text-white/10 pointer-events-none"></i>
+                </div>
+
+                <!-- Theory Cards Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    
+                    <!-- Card 1: Operasi Aljabar & Komposisi -->
+                    <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
+                        <div class="flex items-center space-x-3 text-indigo-600 mb-4">
+                            <i class="fa-solid fa-layer-group text-2xl"></i>
+                            <h3 class="font-bold text-lg text-slate-800">1. Komposisi Fungsi $(f \circ g)(x)$</h3>
+                        </div>
+                        <p class="text-xs text-slate-600 mb-3">Penggabungan dua fungsi berurutan. Masukkan $g(x)$ ke dalam variabel $x$ pada $f(x)$.</p>
+                        
+                        <div class="bg-indigo-50 border-l-4 border-indigo-500 p-3 rounded text-sm mb-4 space-y-1">
+                            <p class="font-bold text-indigo-900">• $(f \circ g)(x) = f(g(x))$</p>
+                            <p class="font-bold text-indigo-900">• $(g \circ f)(x) = g(f(x))$</p>
+                            <p class="text-xs text-indigo-700 font-semibold mt-1">⚠️ Sifat: Tidak Komutatif! $(f \circ g)(x) \neq (g \circ f)(x)$</p>
+                        </div>
+
+                        <div class="bg-amber-50 p-3 rounded-lg border border-amber-200">
+                            <p class="text-xs font-bold text-amber-900 flex items-center gap-1 mb-1">
+                                <i class="fa-solid fa-bolt text-amber-500"></i> Trik Menentukan Fungsi Asal:
+                            </p>
+                            <ul class="text-xs text-amber-800 space-y-1 list-disc list-inside">
+                                />
+                                <li>Cari $f(x)$ dari $(f \circ g)(x)$ & $g(x)$: Pemisalkan $g(x) = u \implies x = \text{fungsi}(u)$.</li>
+                                <li>Cari $g(x)$ dari $(f \circ g)(x)$ & $f(x)$: Substitusikan $g(x)$ langsung ke bentuk $f(x)$.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Card 2: Fungsi Invers & Rumus Cepat -->
+                    <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
+                        <div class="flex items-center space-x-3 text-indigo-600 mb-4">
+                            <i class="fa-solid fa-right-left text-2xl"></i>
+                            <h3 class="font-bold text-lg text-slate-800">2. Invers Fungsi $f^{-1}(x)$</h3>
+                        </div>
+                        <p class="text-xs text-slate-600 mb-3">Kebalikan fungsi. Hanya dimiliki oleh **Fungsi Bijektif** (korespondensi satu-satu).</p>
+
+                        <div class="space-y-2 text-xs">
+                            <div class="p-2.5 bg-slate-50 rounded-lg border border-slate-200 flex justify-between items-center">
+                                <div>
+                                    <span class="font-semibold text-slate-700">Fungsi Linear:</span> $f(x) = ax + b$
+                                </div>
+                                <span class="font-bold text-indigo-600 bg-indigo-50 px-2 py-1 rounded">$f^{-1}(x) = \frac{x - b}{a}$</span>
+                            </div>
+
+                            <div class="p-2.5 bg-slate-50 rounded-lg border border-slate-200 flex justify-between items-center">
+                                <div>
+                                    <span class="font-semibold text-slate-700">Pecahan Linear:</span> $f(x) = \frac{ax + b}{cx + d}$
+                                </div>
+                                <span class="font-bold text-indigo-600 bg-indigo-50 px-2 py-1 rounded">$f^{-1}(x) = \frac{-dx + b}{cx - a}$</span>
+                            </div>
+
+                            <div class="p-2.5 bg-slate-50 rounded-lg border border-slate-200 flex justify-between items-center">
+                                <div>
+                                    <span class="font-semibold text-slate-700">Invers Komposisi:</span> $(f \circ g)^{-1}(x)$
+                                </div>
+                                <span class="font-bold text-indigo-600 bg-indigo-50 px-2 py-1 rounded">$(g^{-1} \circ f^{-1})(x)$</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Interactive Function Sandbox (Kalkulator Visual Les) -->
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
+                    <div class="flex items-center justify-between mb-4 flex-wrap gap-2">
+                        <div class="flex items-center space-x-3">
+                            <div class="p-2 bg-emerald-100 text-emerald-700 rounded-lg">
+                                <i class="fa-solid fa-flask text-lg"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-slate-800 text-base">Interactive Math Sandbox</h3>
+                                <p class="text-xs text-slate-500">Uji coba nilai fungsi secara langsung bersama siswa!</p>
+                            </div>
+                        </div>
+                        <span class="text-xs bg-emerald-50 text-emerald-700 border border-emerald-200 font-medium px-2.5 py-1 rounded-full">Live Calculator</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 bg-slate-50 p-4 rounded-xl mb-4">
+                        <!-- f(x) input -->
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">Fungsi $f(x) = ax + b$</label>
+                            <div class="flex space-x-2">
+                                <input id="sb-f-a" type="number" value="2" class="w-1/2 p-2 text-sm border border-slate-300 rounded-lg text-center" placeholder="a">
+                                <input id="sb-f-b" type="number" value="3" class="w-1/2 p-2 text-sm border border-slate-300 rounded-lg text-center" placeholder="b">
+                            </div>
+                            <span class="text-[11px] text-slate-500 mt-1 block">Hasil: <b id="sb-f-str" class="text-indigo-600">2x + 3</b></span>
+                        </div>
+
+                        <!-- g(x) input -->
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">Fungsi $g(x) = cx + d$</label>
+                            <div class="flex space-x-2">
+                                <input id="sb-g-c" type="number" value="3" class="w-1/2 p-2 text-sm border border-slate-300 rounded-lg text-center" placeholder="c">
+                                <input id="sb-g-d" type="number" value="-1" class="w-1/2 p-2 text-sm border border-slate-300 rounded-lg text-center" placeholder="d">
+                            </div>
+                            <span class="text-[11px] text-slate-500 mt-1 block">Hasil: <b id="sb-g-str" class="text-indigo-600">3x - 1</b></span>
+                        </div>
+
+                        <!-- Input Nilai X -->
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">Nilai Masukan $(x)$</label>
+                            <input id="sb-x-val" type="number" value="4" class="w-full p-2 text-sm border border-slate-300 rounded-lg text-center font-bold text-indigo-600">
+                            <span class="text-[11px] text-slate-500 mt-1 block">Evaluasi di $x$</span>
+                        </div>
+                    </div>
+
+                    <!-- Output Results -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
+                        <div class="p-3 bg-indigo-50/50 border border-indigo-100 rounded-xl">
+                            <span class="text-xs text-indigo-600 font-bold block">$(f \circ g)(x)$</span>
+                            <div id="sb-fog-expr" class="text-sm font-semibold text-slate-800 my-1">6x + 1</div>
+                            <span id="sb-fog-val" class="text-xs bg-indigo-600 text-white px-2 py-0.5 rounded font-mono">Val: 25</span>
+                        </div>
+
+                        <div class="p-3 bg-indigo-50/50 border border-indigo-100 rounded-xl">
+                            <span class="text-xs text-indigo-600 font-bold block">$(g \circ f)(x)$</span>
+                            <div id="sb-gof-expr" class="text-sm font-semibold text-slate-800 my-1">6x + 8</div>
+                            <span id="sb-gof-val" class="text-xs bg-indigo-600 text-white px-2 py-0.5 rounded font-mono">Val: 32</span>
+                        </div>
+
+                        <div class="p-3 bg-amber-50/50 border border-amber-100 rounded-xl">
+                            <span class="text-xs text-amber-700 font-bold block">$f^{-1}(x)$</span>
+                            <div id="sb-finv-expr" class="text-sm font-semibold text-slate-800 my-1">(x - 3)/2</div>
+                            <span id="sb-finv-val" class="text-xs bg-amber-600 text-white px-2 py-0.5 rounded font-mono">Val: 0.5</span>
+                        </div>
+
+                        <div class="p-3 bg-amber-50/50 border border-amber-100 rounded-xl">
+                            <span class="text-xs text-amber-700 font-bold block">$g^{-1}(x)$</span>
+                            <div id="sb-ginv-expr" class="text-sm font-semibold text-slate-800 my-1">(x + 1)/3</div>
+                            <span id="sb-ginv-val" class="text-xs bg-amber-600 text-white px-2 py-0.5 rounded font-mono">Val: 1.67</span>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+
+
+            <!-- ================= MODE UJIAN & LATIHAN ================= -->
+            <section id="view-ujian" class="hidden space-y-6">
+                
+                <!-- Sub-Header Control Bar -->
+                <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 flex flex-wrap items-center justify-between gap-4">
+                    <div class="flex items-center space-x-3">
+                        <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Mode Pengerjaan:</span>
+                        <div class="inline-flex p-1 bg-slate-100 rounded-xl border border-slate-200">
+                            <button id="submode-latihan" onclick="toggleExamSubmode('latihan')" class="px-3 py-1.5 text-xs font-bold rounded-lg transition-all bg-white text-indigo-600 shadow-sm">
+                                <i class="fa-solid fa-lightbulb text-amber-500 mr-1"></i> Latihan (Pembahasan Langsung)
+                            </button>
+                            <button id="submode-ujian" onclick="toggleExamSubmode('ujian')" class="px-3 py-1.5 text-xs font-bold rounded-lg transition-all text-slate-600 hover:text-slate-900">
+                                <i class="fa-solid fa-stopwatch text-rose-500 mr-1"></i> Simulasi Ujian (Timer)
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Timer & Action Buttons -->
+                    <div class="flex items-center space-x-3">
+                        <div id="timer-box" class="hidden items-center space-x-2 bg-rose-50 border border-rose-200 text-rose-700 px-3 py-1.5 rounded-xl text-xs font-bold">
+                            <i class="fa-regular fa-clock animate-pulse"></i>
+                            <span id="timer-display">40:00</span>
+                        </div>
+                        <button onclick="resetExamConfirm()" class="text-xs text-slate-500 hover:text-rose-600 font-semibold px-2 py-1">
+                            <i class="fa-solid fa-arrows-rotate mr-1"></i> Reset
+                        </button>
+                        <button onclick="submitExam()" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-xl text-xs font-bold transition shadow-sm flex items-center space-x-1">
+                            <i class="fa-solid fa-paper-plane"></i>
+                            <span>Selesai & Cek Hasil</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Exam Container Layout (Sidebar Question Grid + Main Question Panel) -->
+                <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+                    
+                    <!-- Left/Top: Question Grid Navigator -->
+                    <div class="lg:col-span-1 bg-white p-4 rounded-2xl shadow-sm border border-slate-200 h-fit">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="font-bold text-slate-800 text-xs uppercase tracking-wider">Navigasi Soal (20)</h3>
+                            <span id="progress-text" class="text-xs font-semibold text-indigo-600">0/20 Terjawab</span>
+                        </div>
+                        
+                        <!-- Grid 1-20 -->
+                        <div id="question-grid" class="grid grid-cols-5 gap-2 mb-4">
+                            <!-- Populated via JavaScript -->
+                        </div>
+
+                        <!-- Legend -->
+                        <div class="text-[11px] space-y-1.5 pt-3 border-t border-slate-100 text-slate-600">
+                            <div class="flex items-center space-x-2">
+                                <span class="w-3 h-3 rounded bg-slate-100 border border-slate-300 inline-block"></span>
+                                <span>Belum Dijawab</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <span class="w-3 h-3 rounded bg-indigo-600 inline-block"></span>
+                                <span>Sudah Dijawab</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <span class="w-3 h-3 rounded bg-amber-400 inline-block"></span>
+                                <span>Ragu-ragu / Ditandai</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right/Main: Active Question Card -->
+                    <div class="lg:col-span-3 space-y-4">
+                        <div id="question-card" class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 relative min-h-[350px] flex flex-col justify-between">
+                            
+                            <!-- Question Header -->
+                            <div>
+                                <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-4">
+                                    <span id="q-number-badge" class="bg-indigo-100 text-indigo-800 text-xs font-bold px-3 py-1 rounded-full">
+                                        Soal #1
+                                    </span>
+                                    <button id="flag-btn" onclick="toggleFlagCurrentQuestion()" class="text-xs font-semibold text-slate-400 hover:text-amber-500 flex items-center space-x-1 transition">
+                                        <i class="fa-solid fa-bookmark"></i>
+                                        <span id="flag-text">Tandai Ragu-ragu</span>
+                                    </button>
+                                </div>
+
+                                <!-- Question Text -->
+                                <div id="q-text" class="text-slate-800 text-base font-medium mb-6 leading-relaxed">
+                                    <!-- Dynamic Math Content -->
+                                </div>
+
+                                <!-- Answer Options -->
+                                <div id="q-options" class="space-y-3">
+                                    <!-- Dynamic Options -->
+                                </div>
+                            </div>
+
+                            <!-- Interactive Solution Box (Only visible in Latihan mode after answer, or after exam submit) -->
+                            <div id="solution-box" class="hidden mt-6 p-4 bg-emerald-50 border border-emerald-200 rounded-xl text-emerald-950 text-xs space-y-2">
+                                <div class="font-bold flex items-center space-x-1 text-emerald-800">
+                                    <i class="fa-solid fa-circle-check text-emerald-600"></i>
+                                    <span>Pembahasan & Solusi:</span>
+                                </div>
+                                <div id="solution-text" class="leading-relaxed"></div>
+                            </div>
+
+                            <!-- Footer Navigation -->
+                            <div class="flex items-center justify-between border-t border-slate-100 pt-4 mt-6">
+                                <button id="btn-prev" onclick="navQuestion(-1)" class="px-4 py-2 border border-slate-300 hover:bg-slate-50 rounded-xl text-xs font-bold text-slate-600 transition flex items-center space-x-1">
+                                    <i class="fa-solid fa-chevron-left"></i>
+                                    <span>Sebelumnya</span>
+                                </button>
+                                
+                                <span class="text-xs text-slate-400 font-mono" id="q-indicator-text">1 dari 20</span>
+
+                                <button id="btn-next" onclick="navQuestion(1)" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold transition flex items-center space-x-1 shadow-sm">
+                                    <span>Selanjutnya</span>
+                                    <i class="fa-solid fa-chevron-right"></i>
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Modal Score & Analysis Summary -->
+    <div id="result-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-xl w-full p-6 shadow-2xl border border-slate-100 transform transition-all">
+            <div class="text-center space-y-3">
+                <div class="w-16 h-16 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center mx-auto text-2xl shadow-inner">
+                    <i class="fa-solid fa-trophy"></i>
+                </div>
+                <h3 class="text-2xl font-extrabold text-slate-800">Hasil Evaluasi Ujian</h3>
+                <p class="text-xs text-slate-500">Kerja bagus! Berikut adalah ringkasan performa siswa:</p>
+                
+                <!-- Score Display -->
+                <div class="py-4 bg-gradient-to-br from-indigo-50 to-slate-50 rounded-2xl border border-indigo-100">
+                    <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Nilai Akhir</span>
+                    <div id="final-score" class="text-5xl font-extrabold text-indigo-600 my-1">85</div>
+                    <span id="final-predikat" class="text-xs font-semibold px-3 py-1 bg-emerald-100 text-emerald-800 rounded-full">Sangat Baik</span>
+                </div>
+
+                <!-- Breakdown Grid -->
+                <div class="grid grid-cols-3 gap-3 text-center text-xs pt-2">
+                    <div class="p-3 bg-slate-50 rounded-xl">
+                        <span class="text-slate-400 block mb-0.5">Benar</span>
+                        <b id="score-correct" class="text-emerald-600 text-lg">17</b>
+                    </div>
+                    <div class="p-3 bg-slate-50 rounded-xl">
+                        <span class="text-slate-400 block mb-0.5">Salah</span>
+                        <b id="score-wrong" class="text-rose-600 text-lg">3</b>
+                    </div>
+                    <div class="p-3 bg-slate-50 rounded-xl">
+                        <span class="text-slate-400 block mb-0.5">Waktu</span>
+                        <b id="score-time" class="text-indigo-600 text-base font-mono">12:45</b>
+                    </div>
+                </div>
+
+                <!-- Buttons -->
+                <div class="pt-4 flex space-x-3">
+                    <button onclick="closeResultModalAndReview()" class="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2.5 rounded-xl text-xs transition shadow">
+                        <i class="fa-solid fa-magnifying-glass mr-1"></i> Tinjau Pembahasan Soal
+                    </button>
+                    <button onclick="resetExamConfirm()" class="px-4 border border-slate-300 hover:bg-slate-50 font-bold py-2.5 rounded-xl text-xs text-slate-600 transition">
+                        Coba Lagi
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        /* ================= 20 SOAL DATASET ================= */
+        const questionsData = [
+            {
+                id: 1,
+                question: "Diketahui fungsi $f(x) = 2x + 3$ dan $g(x) = x^2 - 1$. Rumus dari $(f \\circ g)(x)$ adalah...",
+                options: ["$2x^2 + 1$", "$2x^2 + 5$", "$4x^2 + 12x + 8$", "$2x^2 - 1$", "$4x^2 + 8$"],
+                answer: 0,
+                solution: "$(f \\circ g)(x) = f(g(x)) = f(x^2 - 1) = 2(x^2 - 1) + 3 = 2x^2 - 2 + 3 = 2x^2 + 1$"
+            },
+            {
+                id: 2,
+                question: "Jika $f(x) = 3x - 4$ dan $g(x) = 2x + 5$, maka nilai dari $(f \\circ g)(2)$ adalah...",
+                options: ["21", "23", "25", "27", "29"],
+                answer: 1,
+                solution: "Hitung $g(2) = 2(2) + 5 = 9$. Lalu $(f \\circ g)(2) = f(9) = 3(9) - 4 = 27 - 4 = 23$."
+            },
+            {
+                id: 3,
+                question: "Diketahui $f(x) = x^2 + 2x$ dan $g(x) = x - 3$. Nilai $a$ yang memenuhi $(g \\circ f)(a) = 5$ adalah...",
+                options: ["$-4$ atau $2$", "$-2$ atau $4$", "$-1$ atau $5$", "$-5$ atau $1$", "$2$ atau $3$"],
+                answer: 0,
+                solution: "$(g \\circ f)(a) = g(f(a)) = (a^2 + 2a) - 3 = 5 \\implies a^2 + 2a - 8 = 0 \\implies (a+4)(a-2) = 0$. Jadi $a = -4$ atau $a = 2$."
+            },
+            {
+                id: 4,
+                question: "Diberikan $f(x) = x + 2$ dan $g(x) = \\frac{2x - 1}{x + 3}$. Rumus $(g \\circ f)(x)$ adalah...",
+                options: ["$\\frac{2x + 3}{x + 5}$", "$\\frac{2x - 1}{x + 5}$", "$\\frac{2x + 1}{x + 3}$", "$\\frac{x + 3}{2x + 5}$", "$\\frac{2x + 5}{x + 3}$"],
+                answer: 0,
+                solution: "$(g \\circ f)(x) = g(x + 2) = \\frac{2(x + 2) - 1}{(x + 2) + 3} = \\frac{2x + 4 - 1}{x + 5} = \\frac{2x + 3}{x + 5}$."
+            },
+            {
+                id: 5,
+                question: "Jika diketahui $f(3) = 7$ dan $g(7) = 12$, nilai dari $(g \\circ f)(3)$ adalah...",
+                options: ["7", "12", "19", "21", "84"],
+                answer: 1,
+                solution: "$(g \\circ f)(3) = g(f(3)) = g(7) = 12$."
+            },
+            {
+                id: 6,
+                question: "Diketahui $(f \\circ g)(x) = 6x + 7$ dan $f(x) = 2x - 3$. Rumus fungsi $g(x)$ adalah...",
+                options: ["$3x + 5$", "$3x + 2$", "$3x - 5$", "$6x + 10$", "$2x + 5$"],
+                answer: 0,
+                solution: "$(f \\circ g)(x) = 2g(x) - 3 = 6x + 7 \\implies 2g(x) = 6x + 10 \\implies g(x) = 3x + 5$."
+            },
+            {
+                id: 7,
+                question: "Diketahui $(f \\circ g)(x) = 4x^2 - 6x + 5$ dan $g(x) = 2x - 1$. Rumus fungsi $f(x)$ adalah...",
+                options: ["$x^2 - x + 3$", "$x^2 + x + 3$", "$2x^2 - 3x + 5$", "$x^2 - 2x + 3$", "$4x^2 - 3$"],
+                answer: 0,
+                solution: "Misal $u = 2x - 1 \\implies x = \\frac{u+1}{2}$. $f(u) = 4(\\frac{u+1}{2})^2 - 6(\\frac{u+1}{2}) + 5 = (u^2 + 2u + 1) - 3u - 3 + 5 = u^2 - u + 3$. Maka $f(x) = x^2 - x + 3$."
+            },
+            {
+                id: 8,
+                question: "Diketahui $(g \\circ f)(x) = 2x^2 + 4x + 1$ dan $g(x) = 2x - 3$. Rumus $f(x)$ adalah...",
+                options: ["$x^2 + 2x + 2$", "$x^2 + 2x - 1$", "$2x^2 + 4x + 4$", "$x^2 + 4x + 2$", "$x^2 + x + 1$"],
+                answer: 0,
+                solution: "$g(f(x)) = 2f(x) - 3 = 2x^2 + 4x + 1 \\implies 2f(x) = 2x^2 + 4x + 4 \\implies f(x) = x^2 + 2x + 2$."
+            },
+            {
+                id: 9,
+                question: "Suatu fungsi memenuhi $f\\left(\\frac{x+2}{x-1}\\right) = 3x - 5$. Rumus fungsi $f(x)$ adalah...",
+                options: ["$\\frac{-2x + 11}{x - 1}$", "$\\frac{3x + 5}{x - 1}$", "$\\frac{2x - 11}{x + 1}$", "$\\frac{11x - 2}{x - 1}$", "$\\frac{-2x - 11}{x - 1}$"],
+                answer: 0,
+                solution: "Misal $u = \\frac{x+2}{x-1} \\implies u(x-1) = x+2 \\implies x(u-1) = u+2 \\implies x = \\frac{u+2}{u-1}$. $f(u) = 3(\\frac{u+2}{u-1}) - 5 = \\frac{3u+6 - 5u + 5}{u-1} = \\frac{-2u+11}{u-1}$."
+            },
+            {
+                id: 10,
+                question: "Jika $f(x) = (x + 2)^2$ dan $(f \\circ g)(x) = (x + 1)^2$, maka rumus $g(x)$ yang sesuai adalah...",
+                options: ["$x - 1$", "$x + 1$", "$x - 3$", "$2x - 1$", "$x + 3$"],
+                answer: 0,
+                solution: "$(f \\circ g)(x) = (g(x) + 2)^2 = (x + 1)^2 \\implies g(x) + 2 = x + 1 \\implies g(x) = x - 1$."
+            },
+            {
+                id: 11,
+                question: "Fungsi invers dari $f(x) = 4x - 8$ adalah $f^{-1}(x) = ...$",
+                options: ["$\\frac{x + 8}{4}$", "$\\frac{x - 8}{4}$", "$4x + 8$", "$\\frac{x + 4}{8}$", "$\\frac{1}{4}x - 2$"],
+                answer: 0,
+                solution: "Gunakan trik $f(x) = ax + b \\implies f^{-1}(x) = \\frac{x - b}{a}$. $f(x) = 4x - 8 \\implies f^{-1}(x) = \\frac{x + 8}{4}$."
+            },
+            {
+                id: 12,
+                question: "Invers dari fungsi $f(x) = \\frac{3x + 2}{2x - 5}$ untuk $x \\neq \\frac{5}{2}$ adalah $f^{-1}(x) = ...$",
+                options: ["$\\frac{5x + 2}{2x - 3}$", "$\\frac{-5x + 2}{2x - 3}$", "$\\frac{2x + 3}{5x - 2}$", "$\\frac{5x - 2}{2x + 3}$", "$\\frac{3x - 2}{2x + 5}$"],
+                answer: 0,
+                solution: "Trik pecahan $f(x) = \\frac{ax+b}{cx+d} \\implies f^{-1}(x) = \\frac{-dx+b}{cx-a}$. Dengan $a=3, b=2, c=2, d=-5 \\implies f^{-1}(x) = \\frac{5x+2}{2x-3}$."
+            },
+            {
+                id: 13,
+                question: "Diketahui $f(x) = \\frac{2x + 1}{x - 3}$. Nilai dari $f^{-1}(5)$ adalah...",
+                options: ["$\\frac{16}{3}$", "$\\frac{14}{3}$", "$5$", "$3$", "$\\frac{11}{3}$"],
+                answer: 0,
+                solution: "Jika $f^{-1}(5) = a \\implies f(a) = 5 \\implies \\frac{2a+1}{a-3} = 5 \\implies 2a+1 = 5a - 15 \\implies 3a = 16 \\implies a = \\frac{16}{3}$."
+            },
+            {
+                id: 14,
+                question: "Fungsi invers dari $f(x) = x^2 - 6x + 5$ untuk domain $x \\ge 3$ adalah...",
+                options: ["$3 + \\sqrt{x + 4}$", "$3 - \\sqrt{x + 4}$", "$3 + \\sqrt{x - 5}$", "$6 + \\sqrt{x + 5}$", "$3 + \\sqrt{x}$"],
+                answer: 0,
+                solution: "$y = (x-3)^2 - 4 \\implies y+4 = (x-3)^2 \\implies x-3 = \\sqrt{y+4} \\implies x = 3 + \\sqrt{y+4}$. Jadi $f^{-1}(x) = 3 + \\sqrt{x+4}$."
+            },
+            {
+                id: 15,
+                question: "Diketahui $f(x) = 2^{x+1}$. Nilai dari $f^{-1}(16)$ adalah...",
+                options: ["3", "4", "5", "2", "8"],
+                answer: 0,
+                solution: "Misal $f^{-1}(16) = a \\implies f(a) = 16 \\implies 2^{a+1} = 2^4 \\implies a + 1 = 4 \\implies a = 3$."
+            },
+            {
+                id: 16,
+                question: "Jika $f(x) = 2x - 5$ dan $g(x) = 3x + 1$, maka $(f \\circ g)^{-1}(x)$ adalah...",
+                options: ["$\\frac{x + 3}{6}$", "$\\frac{x - 3}{6}$", "$\\frac{x + 6}{3}$", "$\\frac{6x + 3}{2}$", "$\\frac{x + 1}{6}$"],
+                answer: 0,
+                solution: "$(f \\circ g)(x) = f(3x+1) = 2(3x+1) - 5 = 6x - 3$. Inversnya: $y = 6x - 3 \\implies x = \\frac{y+3}{6}$. Jadi $(f \\circ g)^{-1}(x) = \\frac{x+3}{6}$."
+            },
+            {
+                id: 17,
+                question: "Diketahui $f^{-1}(x) = \\frac{x-1}{2}$ dan $g^{-1}(x) = \\frac{x+3}{5}$. Nilai dari $(f \\circ g)^{-1}(x)$ adalah...",
+                options: ["$\\frac{x + 5}{10}$", "$\\frac{x + 1}{10}$", "$\\frac{x + 2}{5}$", "$\\frac{x - 5}{10}$", "$\\frac{2x + 3}{5}$"],
+                answer: 0,
+                solution: "Gunakan sifat $(f \\circ g)^{-1}(x) = (g^{-1} \\circ f^{-1})(x) = g^{-1}(\\frac{x-1}{2}) = \\frac{\\frac{x-1}{2} + 3}{5} = \\frac{x-1+6}{10} = \\frac{x+5}{10}$."
+            },
+            {
+                id: 18,
+                question: "Jika $f(x) = \\frac{x+1}{x-1}$ untuk $x \\neq 1$, maka $(f \\circ f)(x)$ adalah...",
+                options: ["$x$", "$x+1$", "$1$", "$\\frac{1}{x}$", "$-x$"],
+                answer: 0,
+                solution: "$(f \\circ f)(x) = f(\\frac{x+1}{x-1}) = \\frac{\\frac{x+1}{x-1} + 1}{\\frac{x+1}{x-1} - 1} = \\frac{x+1 + x-1}{x+1 - (x-1)} = \\frac{2x}{2} = x$."
+            },
+            {
+                id: 19,
+                question: "Suatu toko pakaian memberikan diskon ganda $20\\%$ ($d(x) = 0{,}8x$) dilanjutkan potongan harga langsung Rp20.000,00 ($p(x) = x - 20.000$). Jika harga awal baju Rp150.000,00, harga akhir yang harus dibayar adalah...",
+                options: ["Rp100.000,00", "Rp104.000,00", "Rp110.000,00", "Rp120.000,00", "Rp96.000,00"],
+                answer: 0,
+                solution: "Komposisi harga akhir $(p \\circ d)(x) = p(0{,}8x) = 0{,}8x - 20.000$. Substitusi $x = 150.000 \\implies 0{,}8(150.000) - 20.000 = 120.000 - 20.000 = \\text{Rp}100.000{,}00$."
+            },
+            {
+                id: 20,
+                question: "Pabrik pemrosesan kayu menggunakan Mesin I ($m = 2x - 5$) dan Mesin II ($y = m^2 - 3m + 2$). Jika kayu murni yang diproses sebanyak $5$ ton, banyak produk akhir $y$ yang dihasilkan adalah...",
+                options: ["12 ton", "15 ton", "10 ton", "18 ton", "20 ton"],
+                answer: 0,
+                solution: "Tahap I untuk $x = 5 \\implies m = 2(5) - 5 = 5$. Tahap II untuk $m = 5 \\implies y = 5^2 - 3(5) + 2 = 25 - 15 + 2 = 12$ ton."
+            }
+        ];
+
+        /* ================= STATE MANAGEMENT ================= */
+        let currentMode = 'belajar'; // 'belajar' | 'ujian'
+        let examSubmode = 'latihan'; // 'latihan' | 'ujian'
+        let currentQIndex = 0;
+        let userAnswers = new Array(questionsData.length).fill(null);
+        let flaggedQuestions = new Array(questionsData.length).fill(false);
+        let timerInterval = null;
+        let timeRemaining = 40 * 60; // 40 minutes in seconds
+        let isSubmitted = false;
+
+        /* ================= INITIALIZATION ================= */
+        window.onload = function() {
+            initMathSandbox();
+            renderQuestionGrid();
+            loadQuestion(0);
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: '$$', right: '$$', display: true},
+                    {left: '$', right: '$', display: false}
+                ]
+            });
+        };
+
+        /* ================= MODE SWITCHING ================= */
+        function switchMode(mode) {
+            currentMode = mode;
+            const btnBelajar = document.getElementById('tab-belajar');
+            const btnUjian = document.getElementById('tab-ujian');
+            const viewBelajar = document.getElementById('view-belajar');
+            const viewUjian = document.getElementById('view-ujian');
+
+            if (mode === 'belajar') {
+                btnBelajar.className = "px-3 sm:px-5 py-2 text-xs sm:text-sm font-semibold rounded-lg transition-all flex items-center space-x-2 bg-indigo-600 text-white shadow";
+                btnUjian.className = "px-3 sm:px-5 py-2 text-xs sm:text-sm font-semibold rounded-lg transition-all flex items-center space-x-2 text-indigo-200 hover:text-white hover:bg-indigo-800/50";
+                viewBelajar.classList.remove('hidden');
+                viewUjian.classList.add('hidden');
+            } else {
+                btnUjian.className = "px-3 sm:px-5 py-2 text-xs sm:text-sm font-semibold rounded-lg transition-all flex items-center space-x-2 bg-indigo-600 text-white shadow";
+                btnBelajar.className = "px-3 sm:px-5 py-2 text-xs sm:text-sm font-semibold rounded-lg transition-all flex items-center space-x-2 text-indigo-200 hover:text-white hover:bg-indigo-800/50";
+                viewBelajar.classList.add('hidden');
+                viewUjian.classList.remove('hidden');
+            }
+            renderMathInElement(document.body);
+        }
+
+        function toggleExamSubmode(submode) {
+            examSubmode = submode;
+            const btnLatihan = document.getElementById('submode-latihan');
+            const btnUjian = document.getElementById('submode-ujian');
+            const timerBox = document.getElementById('timer-box');
+
+            if (submode === 'latihan') {
+                btnLatihan.className = "px-3 py-1.5 text-xs font-bold rounded-lg transition-all bg-white text-indigo-600 shadow-sm";
+                btnUjian.className = "px-3 py-1.5 text-xs font-bold rounded-lg transition-all text-slate-600 hover:text-slate-900";
+                timerBox.classList.add('hidden');
+                clearInterval(timerInterval);
+            } else {
+                btnUjian.className = "px-3 py-1.5 text-xs font-bold rounded-lg transition-all bg-white text-indigo-600 shadow-sm";
+                btnLatihan.className = "px-3 py-1.5 text-xs font-bold rounded-lg transition-all text-slate-600 hover:text-slate-900";
+                timerBox.classList.remove('hidden');
+                startTimer();
+            }
+            loadQuestion(currentQIndex);
+        }
+
+        /* ================= SANDBOX CALCULATOR LOGIC ================= */
+        function initMathSandbox() {
+            const inputs = ['sb-f-a', 'sb-f-b', 'sb-g-c', 'sb-g-d', 'sb-x-val'];
+            inputs.forEach(id => {
+                document.getElementById(id).addEventListener('input', updateSandbox);
+            });
+            updateSandbox();
+        }
+
+        function updateSandbox() {
+            const a = parseFloat(document.getElementById('sb-f-a').value) || 0;
+            const b = parseFloat(document.getElementById('sb-f-b').value) || 0;
+            const c = parseFloat(document.getElementById('sb-g-c').value) || 0;
+            const d = parseFloat(document.getElementById('sb-g-d').value) || 0;
+            const x = parseFloat(document.getElementById('sb-x-val').value) || 0;
+
+            // String representations
+            document.getElementById('sb-f-str').innerText = `${a}x ${b >= 0 ? '+ ' + b : '- ' + Math.abs(b)}`;
+            document.getElementById('sb-g-str').innerText = `${c}x ${d >= 0 ? '+ ' + d : '- ' + Math.abs(d)}`;
+
+            // (f o g)(x) = a(cx + d) + b = (a*c)x + (a*d + b)
+            const fog_coeff = a * c;
+            const fog_const = (a * d) + b;
+            document.getElementById('sb-fog-expr').innerText = `${fog_coeff}x ${fog_const >= 0 ? '+ ' + fog_const : '- ' + Math.abs(fog_const)}`;
+            document.getElementById('sb-fog-val').innerText = `Val: ${(fog_coeff * x) + fog_const}`;
+
+            // (g o f)(x) = c(ax + b) + d = (c*a)x + (c*b + d)
+            const gof_coeff = c * a;
+            const gof_const = (c * b) + d;
+            document.getElementById('sb-gof-expr').innerText = `${gof_coeff}x ${gof_const >= 0 ? '+ ' + gof_const : '- ' + Math.abs(gof_const)}`;
+            document.getElementById('sb-gof-val').innerText = `Val: ${(gof_coeff * x) + gof_const}`;
+
+            // f^-1(x) = (x - b)/a
+            document.getElementById('sb-finv-expr').innerText = a !== 0 ? `(x - ${b}) / ${a}` : 'N/A';
+            document.getElementById('sb-finv-val').innerText = a !== 0 ? `Val: ${((x - b) / a).toFixed(2)}` : 'N/A';
+
+            // g^-1(x) = (x - d)/c
+            document.getElementById('sb-ginv-expr').innerText = c !== 0 ? `(x - ${d}) / ${c}` : 'N/A';
+            document.getElementById('sb-ginv-val').innerText = c !== 0 ? `Val: ${((x - d) / c).toFixed(2)}` : 'N/A';
+        }
+
+        /* ================= QUESTION RENDERER ================= */
+        function renderQuestionGrid() {
+            const grid = document.getElementById('question-grid');
+            grid.innerHTML = '';
+
+            questionsData.forEach((q, idx) => {
+                const btn = document.createElement('button');
+                btn.id = `qgrid-btn-${idx}`;
+                btn.onclick = () => loadQuestion(idx);
+                
+                let bgClass = "bg-slate-100 border-slate-200 text-slate-700 hover:bg-slate-200";
+                if (flaggedQuestions[idx]) {
+                    bgClass = "bg-amber-400 text-slate-900 border-amber-500 font-bold";
+                } else if (userAnswers[idx] !== null) {
+                    bgClass = "bg-indigo-600 text-white border-indigo-700 font-bold";
+                }
+
+                if (idx === currentQIndex) {
+                    bgClass += " ring-2 ring-offset-2 ring-indigo-500";
+                }
+
+                btn.className = `h-9 rounded-lg text-xs font-semibold border transition flex items-center justify-center ${bgClass}`;
+                btn.innerText = idx + 1;
+                grid.appendChild(btn);
+            });
+
+            const answeredCount = userAnswers.filter(a => a !== null).length;
+            document.getElementById('progress-text').innerText = `${answeredCount}/20 Terjawab`;
+        }
+
+        function loadQuestion(index) {
+            currentQIndex = index;
+            const q = questionsData[index];
+
+            document.getElementById('q-number-badge').innerText = `Soal #${index + 1}`;
+            document.getElementById('q-indicator-text').innerText = `${index + 1} dari 20`;
+            document.getElementById('q-text').innerHTML = q.question;
+
+            // Options
+            const optionsContainer = document.getElementById('q-options');
+            optionsContainer.innerHTML = '';
+
+            q.options.forEach((opt, optIdx) => {
+                const isSelected = userAnswers[index] === optIdx;
+                const isCorrect = q.answer === optIdx;
+
+                let optClass = "border-slate-200 hover:border-indigo-400 hover:bg-indigo-50/50";
+                let badgeClass = "bg-slate-100 text-slate-600";
+
+                if (isSelected) {
+                    optClass = "border-indigo-600 bg-indigo-50/80 ring-1 ring-indigo-500";
+                    badgeClass = "bg-indigo-600 text-white";
+                }
+
+                // In latihan mode or after submit, show correct/wrong highlight
+                if ((examSubmode === 'latihan' && userAnswers[index] !== null) || isSubmitted) {
+                    if (isCorrect) {
+                        optClass = "border-emerald-500 bg-emerald-50/80 ring-1 ring-emerald-500";
+                        badgeClass = "bg-emerald-600 text-white";
+                    } else if (isSelected && !isCorrect) {
+                        optClass = "border-rose-500 bg-rose-50/80 ring-1 ring-rose-500";
+                        badgeClass = "bg-rose-600 text-white";
+                    }
+                }
+
+                const labelLetters = ['A', 'B', 'C', 'D', 'E'];
+                const div = document.createElement('div');
+                div.onclick = () => selectAnswer(optIdx);
+                div.className = `p-3.5 rounded-xl border transition cursor-pointer flex items-center space-x-3 ${optClass}`;
+                div.innerHTML = `
+                    <span class="w-7 h-7 rounded-lg text-xs font-bold flex items-center justify-center ${badgeClass}">
+                        ${labelLetters[optIdx]}
+                    </span>
+                    <span class="text-sm text-slate-800 font-medium">${opt}</span>
+                `;
+                optionsContainer.appendChild(div);
+            });
+
+            // Flag status button
+            const flagBtn = document.getElementById('flag-btn');
+            const flagText = document.getElementById('flag-text');
+            if (flaggedQuestions[index]) {
+                flagBtn.className = "text-xs font-semibold text-amber-500 flex items-center space-x-1 transition";
+                flagText.innerText = "Ditandai Ragu-ragu";
+            } else {
+                flagBtn.className = "text-xs font-semibold text-slate-400 hover:text-amber-500 flex items-center space-x-1 transition";
+                flagText.innerText = "Tandai Ragu-ragu";
+            }
+
+            // Solution box display
+            const solBox = document.getElementById('solution-box');
+            if ((examSubmode === 'latihan' && userAnswers[index] !== null) || isSubmitted) {
+                solBox.classList.remove('hidden');
+                document.getElementById('solution-text').innerHTML = q.solution;
+            } else {
+                solBox.classList.add('hidden');
+            }
+
+            // Prev/Next disable state
+            document.getElementById('btn-prev').disabled = index === 0;
+            document.getElementById('btn-next').disabled = index === questionsData.length - 1;
+
+            renderQuestionGrid();
+            renderMathInElement(document.getElementById('question-card'), {
+                delimiters: [
+                    {left: '$$', right: '$$', display: true},
+                    {left: '$', right: '$', display: false}
+                ]
+            });
+        }
+
+        function selectAnswer(optIdx) {
+            if (isSubmitted && examSubmode === 'ujian') return; // Read-only after submit in exam mode
+            userAnswers[currentQIndex] = optIdx;
+            loadQuestion(currentQIndex);
+        }
+
+        function toggleFlagCurrentQuestion() {
+            flaggedQuestions[currentQIndex] = !flaggedQuestions[currentQIndex];
+            loadQuestion(currentQIndex);
+        }
+
+        function navQuestion(dir) {
+            const nextIdx = currentQIndex + dir;
+            if (nextIdx >= 0 && nextIdx < questionsData.length) {
+                loadQuestion(nextIdx);
+            }
+        }
+
+        /* ================= TIMER & SUBMIT EXAM ================= */
+        function startTimer() {
+            clearInterval(timerInterval);
+            timeRemaining = 40 * 60;
+            timerInterval = setInterval(() => {
+                timeRemaining--;
+                const mins = Math.floor(timeRemaining / 60);
+                const secs = timeRemaining % 60;
+                document.getElementById('timer-display').innerText = 
+                    `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+                
+                if (timeRemaining <= 0) {
+                    clearInterval(timerInterval);
+                    submitExam();
+                }
+            }, 1000);
+        }
+
+        function submitExam() {
+            clearInterval(timerInterval);
+            isSubmitted = true;
+
+            let correctCount = 0;
+            questionsData.forEach((q, idx) => {
+                if (userAnswers[idx] === q.answer) {
+                    correctCount++;
+                }
+            });
+
+            const totalQ = questionsData.length;
+            const score = Math.round((correctCount / totalQ) * 100);
+
+            // Display results modal
+            document.getElementById('final-score').innerText = score;
+            document.getElementById('score-correct').innerText = correctCount;
+            document.getElementById('score-wrong').innerText = totalQ - correctCount;
+
+            const timeSpentSecs = (40 * 60) - timeRemaining;
+            const minsSpent = Math.floor(timeSpentSecs / 60);
+            const secsSpent = timeSpentSecs % 60;
+            document.getElementById('score-time').innerText = `${minsSpent}:${secsSpent.toString().padStart(2, '0')}`;
+
+            // Predikat
+            const predikat = document.getElementById('final-predikat');
+            if (score >= 85) {
+                predikat.innerText = "Sangat Memuaskan";
+                predikat.className = "text-xs font-semibold px-3 py-1 bg-emerald-100 text-emerald-800 rounded-full";
+            } else if (score >= 70) {
+                predikat.innerText = "Baik (Lulus)";
+                predikat.className = "text-xs font-semibold px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full";
+            } else {
+                predikat.innerText = "Perlu Latihan Lagi";
+                predikat.className = "text-xs font-semibold px-3 py-1 bg-amber-100 text-amber-800 rounded-full";
+            }
+
+            document.getElementById('result-modal').classList.remove('hidden');
+        }
+
+        function closeResultModalAndReview() {
+            document.getElementById('result-modal').classList.add('hidden');
+            loadQuestion(currentQIndex);
+        }
+
+        function resetExamConfirm() {
+            if (confirm("Apakah Anda yakin ingin mengulang ujian/latihan dari awal?")) {
+                userAnswers = new Array(questionsData.length).fill(null);
+                flaggedQuestions = new Array(questionsData.length).fill(false);
+                isSubmitted = false;
+                if (examSubmode === 'ujian') {
+                    startTimer();
+                }
+                document.getElementById('result-modal').classList.add('hidden');
+                loadQuestion(0);
+            }
+        }
+    </script>
+</body>
+</html>
